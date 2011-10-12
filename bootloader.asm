@@ -38,13 +38,15 @@ start:
 setup_protected_mode:
 
 	; Create the Interrupt Descriptor Table (for real mode):
-	; We do this by defining all of the table contents here, and then later loading the interrupt pointer
-	; with the address of the first entry.
+	; We do this by storing the Interrupt Desciptor Table Register value into a register,
+	; multiply it by (4 * Vector#) to get the address of the table entry, then change the
+	; table entry to the address of the routine that supports it.
 	
 	; The format of each entry is the following:
 	; 1 - Address of routine to service interrupt (2 bytes)		This is what we will concern ourselves with mostly.
 	; 2 - Offset (2 bytes)										This is always 0.
 	
+	sidt ax		; Store my IDTR register value
 	
 
 data:
