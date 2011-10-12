@@ -33,7 +33,19 @@ start:
 	mov dl, 0					; Column
 	mov al, 3					; Write mode (character, with attribute, and update cursor)
 	int 0x10
+	
+	
+setup_protected_mode:
 
+	; Create the Interrupt Descriptor Table (for real mode):
+	; We do this by defining all of the table contents here, and then later loading the interrupt pointer
+	; with the address of the first entry.
+	
+	; The format of each entry is the following:
+	; 1 - Address of routine to service interrupt (2 bytes)		This is what we will concern ourselves with mostly.
+	; 2 - Offset (2 bytes)										This is always 0.
+	
+	
 
 data:
 
