@@ -25,7 +25,7 @@ start:
 	
 	; Write to the screen saying Dinosaur is starting
 	mov ah, 0x13
-	mov es, os_string
+	mov es, [os_string]
 	mov bp, 0
 	mov cx, os_string_len		; Number of characters to draw
 	mov bl, 0x0C				; Green text color
@@ -34,6 +34,7 @@ start:
 	mov al, 3					; Write mode (character, with attribute, and update cursor)
 	int 0x10
 	
+	hlt
 	
 setup_protected_mode:
 
@@ -46,7 +47,6 @@ setup_protected_mode:
 	; 1 - Address of routine to service interrupt (2 bytes)		This is what we will concern ourselves with mostly.
 	; 2 - Offset (2 bytes)										This is always 0.
 	
-	sidt ax		; Store my IDTR register value
 	
 
 data:
