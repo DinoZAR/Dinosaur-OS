@@ -1,23 +1,24 @@
-from struct import Struct
+import struct
 
 print "Creating raw disk image:"
+diskSize = 2048		# in megabytes
+print "Disk Size ->", diskSize, "megabytes"
 
-with open('Dinosaur.img', 'wb') as imageFile:
 
-	print "1: Bootloader"
-	
-	bootFile = open('BOOT.bin', 'rb')
-	data = bootFile.read()
-	
-	
-	bootFile.close()
-	
-	
-	print "2: Partition Table"
-	
-	
-	
-	print "3: Kernel"
-	
-	
-	print "Disk creation complete!"
+imageFile = open('Dinosaur.img', 'wb')
+
+# Add bootloader to first sector of "virtual" hard drive
+bootFile = open('BOOT.bin', 'rb')
+data = bootFile.read()
+imageFile.write(data)
+bootFile.close()
+
+
+# Write out my general system block. Refer to "Dinosaur File System - RAWR" for specification
+
+
+# Inject the kernel
+
+
+imageFile.close()
+print "Disk creation complete!"
