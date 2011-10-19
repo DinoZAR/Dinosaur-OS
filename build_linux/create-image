@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "Creating image..."
+
+cd ..
+cd Dinosaur/bootloader
+
+python create-image.py
+
+cd ..
+cd ..
+cd build_linux
+
+echo "Done!"

@@ -1,0 +1,13 @@
+#! /bin/sh
+
+echo "Creating image..."
+
+cd ..
+cd bootloader
+
+python create-image.py
+
+cd ..
+cd build_linux
+
+echo "Done!"

@@ -1,0 +1,25 @@
+#! /usr/bin/python
+
+import argparse
+
+
+# Parse command line arguments
+parser = argparse.ArgumentParser(description='Thunderizes Python code into Assembly.')
+parser.add_argument('file', metavar='file.py', type=str, 
+					help='The Python file with which to Thunderize.')\
+
+args = parser.parse_args()
+
+
+# Tell the world what job ThunderViper is doing
+print 'Thunderizing file:', args.file
+print 'In mode: AMD64'
+
+
+# Parse the file into a logical program tree structure.
+# After that, then we can apply Assembly contructs to the logical tree.
+done = False
+lineNum = 0
+
+while not done:
+	pass

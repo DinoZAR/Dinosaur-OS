@@ -1,0 +1,13 @@
+#! /bin/sh
+
+echo "Compiling bootloader..."
+
+cd ..
+cd bootloader
+
+yasm bootloader.asm -f bin -o BOOT.bin
+
+cd ..
+cd build_linux
+
+echo "Done!"
