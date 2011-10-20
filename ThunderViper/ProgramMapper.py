@@ -14,3 +14,45 @@ class ProgramMap:
 	# as an object to a program tree. The program tree defines how the program is
 	# constructed, and from there, an Assembly representation will be created from
 	# it.
+	
+	def __init__(self):
+		
+		# Current line it is parsing
+		line = ''
+		
+		# Program tree object list
+		progObjList = []
+		
+		
+	def parse(self, line):
+		
+		# Scan the line for any signs of periods, parentheses, equal signs, equalities
+		# and things of that sort. These are markings that define portions of a
+		# program statement, and also of something wondrous
+		
+		specialChars = []
+		
+		for c in range(len(line)):
+			
+			if line[c] == '.':
+				specialChars.append([line[c], c])
+			if line[c] == '(':
+				specialChars.append([line[c], c])
+			if line[c] == ')':
+				specialChars.append([line[c], c])
+			if line[c] == '=':
+				specialChars.append([line[c], c])
+			if line[c] == '>':
+				specialChars.append([line[c], c])
+			if line[c] == '<':
+				specialChars.append([line[c], c])
+			if line[c] == '[':
+				specialChars.append([line[c], c])
+			if line[c] == ']':
+				specialChars.append([line[c], c])
+	
+	def dump(self, outFile):
+		'''Prints out the contents of the program tree in a specially formatted HTML page.
+		Outfile defines where the HTML output should be saved.'''
+		
+		print 'Dumping contents of program tree!'

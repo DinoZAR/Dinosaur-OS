@@ -6,7 +6,7 @@ import ProgramMapper
 
 
 # Parse command line arguments
-parser = argparse.ArgumentParser(description='Thunderizes Python code into Assembly.')
+parser = argparse.ArgumentParser(description='ThunderViper: Thunderizes Python code into Assembly using real lightening!')
 parser.add_argument('file', metavar='file.py', type=str, 
 					help='The Python file with which to Thunderize.')\
 
@@ -43,4 +43,7 @@ for line in progLines:
 # After parsing the file, for debug purposes, print out an HTML page detailing the
 # program flow.
 progMap.dump('DEBUG_ProgramMap.html')
-	
+
+
+# After everything is all said and done, say that ThunderViper is finished
+print "Done!"

@@ -6,7 +6,7 @@ import ProgramMapper
 
 
 # Parse command line arguments
-parser = argparse.ArgumentParser(description='Thunderizes Python code into Assembly.')
+parser = argparse.ArgumentParser(description='ThunderViper: Thunderizes Python code into Assembly using real lightening!')
 parser.add_argument('file', metavar='file.py', type=str, 
 					help='The Python file with which to Thunderize.')\
 
