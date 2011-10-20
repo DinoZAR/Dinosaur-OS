@@ -46,6 +46,10 @@ class ProgramMap:
 				specialChars.append([line[c], c])
 			if line[c] == '<':
 				specialChars.append([line[c], c])
+			if line[c] == '[':
+				specialChars.append([line[c], c])
+			if line[c] == ']':
+				specialChars.append([line[c], c])
 	
 	def dump(self, outFile):
 		'''Prints out the contents of the program tree in a specially formatted HTML page.

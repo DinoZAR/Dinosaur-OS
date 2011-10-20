@@ -26,30 +26,8 @@ class ProgramMap:
 		
 	def parse(self, line):
 		
-		# Scan the line for any signs of periods, parentheses, equal signs, equalities
-		# and things of that sort. These are markings that define portions of a
-		# program statement, and also of something wondrous
-		
-		specialChars = []
-		
-		for c in range(len(line)):
-			
-			if line[c] == '.':
-				specialChars.append([line[c], c])
-			if line[c] == '(':
-				specialChars.append([line[c], c])
-			if line[c] == ')':
-				specialChars.append([line[c], c])
-			if line[c] == '=':
-				specialChars.append([line[c], c])
-			if line[c] == '>':
-				specialChars.append([line[c], c])
-			if line[c] == '<':
-				specialChars.append([line[c], c])
-			if line[c] == '[':
-				specialChars.append([line[c], c])
-			if line[c] == ']':
-				specialChars.append([line[c], c])
+		# Scan the line for a single equals sign. This should assign what is on
+		# the right to what is on the left.
 	
 	def dump(self, outFile):
 		'''Prints out the contents of the program tree in a specially formatted HTML page.
