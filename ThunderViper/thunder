@@ -23,10 +23,5 @@ completeFileName = os.path.abspath(args.file)
 inFile = open(completeFileName, 'r')
 
 
-# Get a parse tree from the Python program. This saves me a whole lot of work!
-parseTreeRoot = ast.parse(inFile.read())
-
-print ast.dump(parseTreeRoot)
-
 # After everything is all said and done, say that ThunderViper is finished
 print "Done!"

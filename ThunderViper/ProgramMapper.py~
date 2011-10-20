@@ -26,33 +26,41 @@ class ProgramMap:
 		
 	def parse(self, line):
 		
-		# Scan the line for any signs of periods, parentheses, equal signs, equalities
-		# and things of that sort. These are markings that define portions of a
-		# program statement, and also of something wondrous
+		# Divide the line up into a set of tokens based on the following rules
 		
-		specialChars = []
-		
-		for c in range(len(line)):
-			
-			if line[c] == '.':
-				specialChars.append([line[c], c])
-			if line[c] == '(':
-				specialChars.append([line[c], c])
-			if line[c] == ')':
-				specialChars.append([line[c], c])
-			if line[c] == '=':
-				specialChars.append([line[c], c])
-			if line[c] == '>':
-				specialChars.append([line[c], c])
-			if line[c] == '<':
-				specialChars.append([line[c], c])
-			if line[c] == '[':
-				specialChars.append([line[c], c])
-			if line[c] == ']':
-				specialChars.append([line[c], c])
+		# 1: If found [a-zA-Z_], keep going until characters are not [a-zA-Z0-9_]
+		#		a) If end is whitespace, then it is an object
+		#		b) If end is "(", then it is a method
+		#			i. If word before is a recognized class name, then it is constructor
+		#			ii. If word is a reserved keyword, then go to 4
+		#			iii. If word is built-in function, then autoimport it
+		# 2: If found [=<>!], then boolean operator
+		#		a) If = is only token, then it is an assignment operator
+		#		b) Check for [=<>] after current token if it is [=<>]
+		#			i. If two tokens are "<<" or ">>", they are bit shifts
+		#			ii. [<>] must always be before [=]
+		# 3: If found [(], then a nested statement
+		#		a) If [a-zA-Z0-9] is right before [(], refer to 1b
+		#		b) Store remaining parse objects under itself until it finds [)]
+		#			i. Give [)] to another nested statement inside itself before claiming a [)]
+		#			ii. If [)] is still not claimed, then this nested statement will claim it
+		#			iii. If this nested statement never claims it, then SYNTAX ERROR
+		# 4: If a reserved keyword, do the following
+		#		a) [for, while, if, else]: use custom parser for it
+		#		b) [and, or, not]: replace with equivalent boolean operator in 2 and treat as such
+		#		c) [is]: use custom operator for it
+		# 5: If found [[], then a list
+		#		a) Read characters 1 by 1
+		#		b) If found [[] again, then recurse to 5.
+		#		c) If found [,], claim preceding statements to the last [,] as a value
+		#			i. Parse this segment individually and check to see if value is resolved
+		#			ii. 
+		#
+		#
 	
 	def dump(self, outFile):
 		'''Prints out the contents of the program tree in a specially formatted HTML page.
 		Outfile defines where the HTML output should be saved.'''
 		
 		print 'Dumping contents of program tree!'
+		

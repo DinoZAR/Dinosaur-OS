@@ -1,4 +1,33 @@
-var1 = 2
-var3 = 3
+#! /usr/bin/python
 
-var4 = var1 + var2
+import argparse
+import parser
+import os
+
+
+# Parse command line arguments
+aparser = argparse.ArgumentParser(description='ThunderViper: Thunderizes Python code into Assembly using real lightening!')
+aparser.add_argument('file', metavar='file.py', type=str, 
+					help='The Python file with which to Thunderize.')\
+
+args = aparser.parse_args()
+
+
+# Tell the world what job ThunderViper is doing
+print 'Thunderizing file:', args.file
+print 'In mode: AMD64'
+
+
+# Open file for reading
+completeFileName = os.path.abspath(args.file)
+inFile = open(completeFileName, 'r')
+
+
+# Get a parse tree from the Python program. This saves me a whole lot of work!
+parseTree = parser.expr(inFile.read())
+
+print parseTree
+
+
+# After everything is all said and done, say that ThunderViper is finished
+print "Done!"
