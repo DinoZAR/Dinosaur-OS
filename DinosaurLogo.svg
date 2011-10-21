@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 "
+   sodipodi:docname="DinosaurLogo.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="333.69886"
+     inkscape:cy="563.31333"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#98ca0d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 161.71459,370.68347 c -62.132034,0 -112.500004,50.36797 -112.500004,112.5 0,62.13203 50.36797,112.5 112.500004,112.5 62.13203,0 112.5,-50.36797 112.5,-112.5 0,-62.13203 -50.36797,-112.5 -112.5,-112.5 z m -0.375,20.96875 c 50.34973,0 91.15625,40.80652 91.15625,91.15625 0,37.74769 -22.95833,70.14523 -55.65625,84 12.76288,-14.93224 27.08542,-54 4.4375,-54 -1.74658,0 4.69732,-11.2794 4.84375,-11.71875 2.27382,-6.82224 2.0625,-15.1481 2.0625,-22.75 0,-12.96223 -15.77276,-0.0632 -18.625,-2.0625 -3.44322,-2.4135 1.83971,-8.41566 -1.375,-14.15625 -2.6026,-4.64752 -3.82008,-8.12023 -6.90625,-12.75 -3.31402,-4.9716 -18.85113,-19.83982 -27.28125,-19.8125 -0.87208,0.003 -1.64519,0.15068 -2.34375,0.5 -16.33361,8.16773 -44.84375,37.91884 -44.84375,57.9375 0,19.12896 41.98164,-1.87152 33.125,15.84375 -8.03654,16.0749 3.30887,36.78682 -4.15625,51.71875 -1.37164,2.74359 -4.94432,7.28223 -8.21875,12 -33.629944,-13.42486 -57.375004,-46.33002 -57.375004,-84.75 0,-50.34973 40.806524,-91.15625 91.156254,-91.15625 z m -2.4375,60.5 c 6.96847,-0.17696 10.72545,4.02455 9.21875,6.9375 -2.67857,5.17857 -26.80357,8.23214 -30.375,4.125 8.35938,-8.125 15.73633,-10.92487 21.15625,-11.0625 z"
+       id="path3774"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/spencer/Desktop/DinosaurLogoHorizontal.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3780"
+       style="font-size:48px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="matrix(1.9796291,0,0,1.9796291,-393.64647,-358.09127)"
+       inkscape:export-filename="/home/spencer/Desktop/DinosaurLogoHorizontal.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><flowRegion
+         id="flowRegion3782"><rect
+           id="rect3784"
+           width="323.24881"
+           height="124.24876"
+           x="348.50262"
+           y="403.84424"
+           style="font-size:48px" /></flowRegion><flowPara
+         id="flowPara3786">dinosaur</flowPara></flowRoot>  </g>
+</svg>
