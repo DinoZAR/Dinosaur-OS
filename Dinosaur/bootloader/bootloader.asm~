@@ -57,7 +57,7 @@ setup_protected_mode:
 
 PrintString:
 	mov ah, 0x0E		; Use BIOS Teletype function, which updates cursor for us
-	mov cx, 1			; Set number of characters read to 0
+	mov cx, 1
 	
 	begin:
 	lodsb		; Load next character
