@@ -4,13 +4,13 @@ Dinosaur is a new operating system designed for multimedia production using the 
 
 ## How do I get started?
 
-It is recommended until Dinosaur matures to use a virtual machine in order to test out Dinosaur's capabilities. The build instructions assume that you are using VirtualBox as your virtual machine. Also, it is assumed you have a 64-bit processor (which if you don't, Dinosaur will not work for you).
+It's recommended until Dinosaur matures to use a virtual machine in order to test out Dinosaur's capabilities. The build instructions assume that you are using VirtualBox as your virtual machine. Also, it is assumed you have a 64-bit processor (which if you don't, Dinosaur will not work for you).
 
 ### Windows
 
-1. Run build scripts provided in directory **build_win**. You may either double-click **run-all.bat** to run it, or if you like to see debug info, you can use the command prompt and run **run-all.bat** from there.
+1. Run build scripts provided in directory **build_win**. You may either double-click **run-all.bat** to run them all, or if you like to see debug info, you can use the command prompt and run **run-all.bat** from there. These scripts build all of the assembly files and creates a VirtualBox Disk Image, which is the virtual hard drive you will use in your Dinosaur virtual machine.
 
-2. Create the Dinosaur virtual machine. Here's how you do that
+2. Create the Dinosaur virtual machine. Here's how you do that:
 	* Click **New** in the upper left hand corner
 	* In the wizard, click **Next**
 	* Set the **Name** to **Dinosaur**, and under **OS Type**, set **Operating System** to **Other** and **Version** as **Other/Unknown**
@@ -19,4 +19,7 @@ It is recommended until Dinosaur matures to use a virtual machine in order to te
 	* Click **Next**
 	* This shows you a summary page. Click **Create**
 	
-3. Click on your new Dinosaur virtual machine and click **Start**
+3. Click on your new Dinosaur virtual machine and click **Start**! Easy!
+
+4. If you want to update Dinosaur, pull from this repository and run **run-all.bat** again. Your virtual machine will automatically use the newly generated virtual hard drive to boot from.
+	* WARNING: If you saved any data to this virtual hard drive, it will be gone in a heartbeat. To make sure this doesn't happen to you, create a secondary virtual hard drive and save your data in there. As of now, I haven't created the build script to generate a properly formatted file system on a hard drive yet.
