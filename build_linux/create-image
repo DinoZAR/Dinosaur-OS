@@ -7,13 +7,13 @@ cd Dinosaur/bootloader
 
 
 # Remove previous images if they are present
-if [-a Dinosaur.img]
-	then
-		rm Dinosaur.img
+if ls | grep -q Dinosaur.img; then
+	echo "Removing old Dinosaur.img..."
+	rm ./Dinosaur.img
 fi
-if [-a Dinosaur.vdi]
-	then
-		rm Dinosaur.vdi
+if ls | grep -q Dinosaur.vdi; then
+	echo "Removing old Dinosaur.vdi..."
+	rm ./Dinosaur.vdi
 fi
 
 # Creates the raw image file
