@@ -3,10 +3,23 @@
 echo "Creating image..."
 
 cd ..
-cd bootloader
+cd Dinosaur/bootloader
+
+
+# Remove previous images if they are present
+if [-a Dinosaur.img]
+	then
+		rm Dinosaur.img
+fi
+if [-a Dinosaur.vdi]
+	then
+		rm Dinosaur.vdi
+fi
 
 python create-image.py
+VBoxManage convertfromraw Dinosaur.img Dinosaur.vdi --uuid cb4350ce-f31a-4751-b3dd-603fa5601f50
 
+cd ..
 cd ..
 cd build_linux
 

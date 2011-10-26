@@ -1,6 +1,6 @@
 # Welcome to Dinosaur!
 
-Dinosaur is a new operating system designed for multimedia production using the AMD64 architecture. It also possesses ThunderViper, a Python compiler that "Thunderizes" Python code and converts it to system-level Assembly! With all powers combined, this should make a very fast and pleasent operating system to use.
+Dinosaur is a new operating system designed for multimedia production using the AMD64 architecture. It uses Assembly for the majority of the kernel, which should make for a fast and pleasent operating system.
 
 ## How do I get started?
 
@@ -8,4 +8,15 @@ It is recommended until Dinosaur matures to use a virtual machine in order to te
 
 ### Windows
 
-The build scripts required to build and create a valid VirtualBox image containing Dinosaur can be found in the folder **build_win.**
+1. Run build scripts provided in directory **build_win**. You may either double-click **run-all.bat** to run it, or if you like to see debug info, you can use the command prompt and run **run-all.bat** from there.
+
+2. Create the Dinosaur virtual machine. Here's how you do that
+	* Click **New** in the upper left hand corner
+	* In the wizard, click **Next**
+	* Set the **Name** to **Dinosaur**, and under **OS Type**, set **Operating System** to **Other** and **Version** as **Other/Unknown**
+	* Leave base memory size as it is for now. Click **Next**
+	* Click **Use existing hard disk**, and click on the folder icon. In your Dinosaur-OS directory, travel to **Dinosaur/bootloader** and click on **Dinosaur.vdi** (the one with the red cube icon)
+	* Click **Next**
+	* This shows you a summary page. Click **Create**
+	
+3. Click on your new Dinosaur virtual machine and click **Start**

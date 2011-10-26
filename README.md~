@@ -1,0 +1,14 @@
+# Welcome to Dinosaur!
+
+Dinosaur is a new operating system designed for multimedia production using the AMD64 architecture. It uses Assembly for the majority of the kernel, which should make for a fast and pleasent operating system.
+
+## How do I get started?
+
+It is recommended until Dinosaur matures to use a virtual machine in order to test out Dinosaur's capabilities. The build instructions assume that you are using VirtualBox as your virtual machine. Also, it is assumed you have a 64-bit processor (which if you don't, Dinosaur will not work for you).
+
+### Windows
+
+1. Run build scripts provided in directory **build_win**. You may either double-click **run-all.bat** to run it, or if you like to see debug info, you can use the command prompt and run **run-all.bat** from there.
+
+2. Create the Dinosaur virtual machine. Here's how you do that
+	* 

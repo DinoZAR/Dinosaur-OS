@@ -5,7 +5,28 @@ echo "Creating image..."
 cd ..
 cd Dinosaur/bootloader
 
+
+# Remove previous images if they are present
+if [-a Dinosaur.img]
+	then
+		rm Dinosaur.img
+fi
+if [-a Dinosaur.vdi]
+	then
+		rm Dinosaur.vdi
+fi
+
+# Creates the raw image file
 python create-image.py
+
+# Converts raw image to VDI used by VirtualBox
+#
+# NOTE:
+# For this to work correctly, this must be done before you create your Dinosaur
+# virtual machine in VirtualBox. Also, the UUID must not be present in any other
+# virtual hard drives that already exist in your VirtualBox configuration. If
+# there is a naming conflict, then change the UUID to some other unique value.
+VBoxManage convertfromraw Dinosaur.img Dinosaur.vdi --uuid cb4350ce-f31a-4751-b3dd-603fa5601f50
 
 cd ..
 cd ..
