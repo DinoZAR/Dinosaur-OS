@@ -30,7 +30,7 @@ After this is all set up, follow the build instructions below.
 	* In the wizard, click **Next**
 	* Set the **Name** to **Dinosaur**, and under **OS Type**, set **Operating System** to **Other** and **Version** as **Other/Unknown**
 	* Leave base memory size as it is for now. Click **Next**
-	* Click **Use existing hard disk**, and click on the folder icon. In your Dinosaur-OS directory, travel to **Dinosaur/bootloader** and click on **Dinosaur.vdi** (the one with the red cube icon)
+	* Click **Use existing hard disk**, and click on the folder icon. Just outside your Dinosaur-OS directory, you will find a file called **Dinosaur.vdi** (the one with the red cube icon). Use this one. The reason why my scripts do this is so that images aren't saved to the working directory, and then to the repository. It's wasted space, and everybody would have access to your information. It's better this way.
 	* Click **Next**
 	* This shows you a summary page. Click **Create**
 	
