@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "Compiling bootloader..."
+
+cd ..
+cd Dinosaur/bootloader
+
+nasm bootloader.asm -f bin -o BOOT.bin
+
+cd ..
+cd ..
+cd build_linux
+
+echo "Done!"
