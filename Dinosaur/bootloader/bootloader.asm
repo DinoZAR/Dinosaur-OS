@@ -31,6 +31,10 @@ start:
 	mov si, mesg_status_2
 	call PrintString
 	
+	mov cx, 0x89AB
+	push cx
+	call PrintRegister
+	
 check_LBP_extensions:
 	
 	; Check LBP extensions with BIOS disk services
@@ -39,13 +43,11 @@ check_LBP_extensions:
 	; supports extensions
 	mov ah, 0x41
 	mov bx, 0x55AA		; Magic number
-	mov dl, 0x01		; Drive number
+	mov dl, 0x80		; Drive number 1000 0000B is first one according to standards
 	int 0x13
 	
-	push cx						; Print out contents of register for debug purposes
-	call PrintRegister
-	
-	and cx, 0x0001				; Masks all except first bit
+	and cx, 0x8000				; Masks all except first bit
+	shr cx, 15
 	cmp cx, 1
 	je read_filesystem
 	
@@ -94,27 +96,25 @@ PrintHorizRule:
 		ret
 
 PrintRegister:
-	mov ah, 0x0E				; AX -> Reserved for BIOS functions
-	mov bx, 0x7FFF				; BX -> Used for mask to check each bit
-	mov cl, 16					; CX -> Counter
-	pop dx						; DX -> Actual register to print
+	; Manage my stack properly
+	push bp
+	mov bp, sp
 	
+	mov ah, 0x0E				; AX -> Reserved for BIOS functions
+	mov bx, 0x8000				; BX -> Used for mask to check each bit
+	mov cl, 16					; CX -> Counter
+								; DX -> Actual register to print
+								
 	PrintRegister_begin:
-		push dx
+		mov dx, [bp+8]
 		and dx, bx				; Mask bit to check
-		push cx
-		sub cl, 1
-		shr dx, cl				; Move single masked bit to first position
-		pop cx
 		
-		cmp dx, 1
-		pop dx
-		
-		je PrintRegister_1
-		jmp PrintRegister_0
+		or dx, 0
+		jz PrintRegister_0
+		jmp PrintRegister_1
 		
 	PrintRegister_iterate:
-		shl bx, 1				; Move my mask bit by 1
+		shl bx, 1				; Move my mask over by 1
 		dec cl
 		cmp cl, 0
 		je PrintRegister_end
@@ -126,14 +126,13 @@ PrintRegister:
 		jmp PrintRegister_iterate
 		
 	PrintRegister_0:
-		mov al, 48
+		mov al, 48				; ASCII code for character '0'
 		int 0x10
 		jmp PrintRegister_iterate
 		
 	PrintRegister_end:
-		mov si, success
-		call PrintString
-		ret
+		pop bp
+		ret 4
 		
 		
 data:
