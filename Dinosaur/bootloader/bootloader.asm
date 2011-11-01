@@ -25,15 +25,14 @@ start:
 	; Write "Welcome to Dinosaur!" to the screen
 	mov si, welcome_string
 	call PrintString
+	call NextLine
 	
 	call PrintHorizRule
 	
+	; Say we are getting next image
 	mov si, mesg_status_2
 	call PrintString
-	
-	mov cx, 0x89AB
-	push cx
-	call PrintRegister
+	call NextLine
 	
 check_LBP_extensions:
 	
@@ -46,18 +45,20 @@ check_LBP_extensions:
 	mov dl, 0x80		; Drive number 1000 0000B is first one according to standards
 	int 0x13
 	
-	and cx, 0x8000				; Masks all except first bit
-	shr cx, 15
-	cmp cx, 1
-	je read_filesystem
+	and cx, 0x0001		; Masks all except first bit
+	or cx, 0
+	jnz read_filesystem
 	
 	mov si, no_LBP_extensions		; If test failed, then say it has and halt
 	call PrintString
-	
+	call NextLine
+	hlt
 	
 read_filesystem:
-	mov si, success
-	call PrintString
+	
+	; Get the contents of a sector and print out its crap
+	
+	
 	hlt
 
 
@@ -80,7 +81,7 @@ PrintString:
 PrintHorizRule:
 	mov ah, 0x0E		; Teletype function
 	mov al, "_"
-	mov cx, 80
+	mov cx, 81
 	
 	PrintHorizRule_begin:
 		dec cx
@@ -106,7 +107,7 @@ PrintRegister:
 								; DX -> Actual register to print
 								
 	PrintRegister_begin:
-		mov dx, [bp+8]
+		mov dx, [bp+4]
 		and dx, bx				; Mask bit to check
 		
 		or dx, 0
@@ -114,7 +115,7 @@ PrintRegister:
 		jmp PrintRegister_1
 		
 	PrintRegister_iterate:
-		shl bx, 1				; Move my mask over by 1
+		shr bx, 1				; Move my mask over by 1
 		dec cl
 		cmp cl, 0
 		je PrintRegister_end
@@ -132,20 +133,29 @@ PrintRegister:
 		
 	PrintRegister_end:
 		pop bp
-		ret 4
+		ret 2
 		
-		
+NextLine:
+	mov si, next_line
+	call PrintString
+	ret
+
+
+;	DATA
+
 data:
 	%define CR 13
 	%define LF 10
 	
-	welcome_string db "Welcome to Dinosaur!",CR,LF,0
-	mesg_status_2 db "Reading 2nd Stage image...",CR,LF,0
+	welcome_string db "Welcome to Dinosaur!",0
+	mesg_status_2 db "Reading 2nd Stage image...",0
+	next_line db CR,LF,0
 	
 	; Assorted error messages
-	no_LBP_extensions db "No LBP Ext!",CR,LF,0
-	success db "Success",CR,LF,0
+	no_LBP_extensions db "No LBP Ext!",0
+	success db "Success",0
 	
+; END FILLER STUFF
 	
 end_filler:
     times 510 - ($ - $$) db 0		; Fills rest of sector with 0's
