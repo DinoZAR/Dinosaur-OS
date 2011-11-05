@@ -1,5 +1,16 @@
-; This is the very beginning of Dinosaur OS! It goes into protected mode and
-; jumps to the kernel loader
+; This is the very beginning of Dinosaur OS! It simply loads the second-stage
+; bootloader and executes it. It does not handle the transition from real-mode
+; to protected mode to long mode, which is reserved for the second stage loader.
+;
+; After this bootloader has finished executing, here is what will result (if
+; everything works OK):
+;
+; 1. SS and FS will be set up to use the maximum space possible
+;
+; 2. SS will be at 0x1000 and above (used for stack)
+;
+; 3. FS will be at 0x2000 and above (used as data buffer for reading disks)
+
 
 [BITS 16]		; In real mode, every instruction is 16 bits
 [ORG 0x7C00]	; This is where our code will be loaded, so we calculate
@@ -10,7 +21,24 @@
 
 start:
 	
-	; Set video mode for BIOS so it always shows a large, colorful display for drawing text
+	; Setup my stack. Give it all the memory it can get, which is 64KB.
+	; Turn off interrupts while this is happening
+	cli
+	mov ax, 0x1000		; 64 KB
+	mov ss, ax
+	mov ax, 0xFFF		; Set stack pointer to point to top
+	mov sp, ax
+	mov ax, 0			; Set base pointer to point at bottom
+	mov bp, ax
+	
+	; Also setup my FS segment. This will be used to read data from disks
+	; Restore interrupts after this is all done
+	mov ax, 0x2000
+	mov fs, ax
+	sti
+	
+	; Set video mode for BIOS so it always shows a large, colorful display for 
+	; drawing text
 	mov ah, 0x00
 	mov al, 3
 	int 0x10
@@ -53,14 +81,12 @@ check_LBP_extensions:
 	call PrintString
 	call NextLine
 	hlt
-	
-read_filesystem:
-	
-	; Get the contents of a sector and print out its crap
-	
-	
-	hlt
 
+read_filesystem:
+	mov si, success
+	call PrintString
+	call NextLine
+	hlt
 
 ; FUNCTIONS	
 	
@@ -77,6 +103,7 @@ PrintString:
 		
 	PrintString_end:
 		ret
+
 
 PrintHorizRule:
 	mov ah, 0x0E		; Teletype function
@@ -95,6 +122,7 @@ PrintHorizRule:
 		mov al, LF
 		int 0x10
 		ret
+
 
 PrintRegister:
 	; Manage my stack properly
@@ -135,6 +163,7 @@ PrintRegister:
 		pop bp
 		ret 2
 		
+		
 NextLine:
 	mov si, next_line
 	call PrintString
@@ -154,6 +183,7 @@ data:
 	; Assorted error messages
 	no_LBP_extensions db "No LBP Ext!",0
 	success db "Success",0
+	
 	
 ; END FILLER STUFF
 	
