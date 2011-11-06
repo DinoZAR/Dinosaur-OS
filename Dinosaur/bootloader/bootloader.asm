@@ -20,21 +20,10 @@
 %define LF 10
 
 start:
-	
-	; Setup my stack. Give it all the memory it can get, which is 64KB.
-	; Turn off interrupts while this is happening
+
 	cli
-	mov ax, 0x1000		; 64 KB
-	mov ss, ax
-	mov ax, 0xFFF		; Set stack pointer to point to top
-	mov sp, ax
-	mov ax, 0			; Set base pointer to point at bottom
-	mov bp, ax
-	
-	; Also setup my FS segment. This will be used to read data from disks
-	; Restore interrupts after this is all done
 	mov ax, 0x2000
-	mov fs, ax
+	mov es, ax
 	sti
 	
 	; Set video mode for BIOS so it always shows a large, colorful display for 
@@ -57,7 +46,7 @@ start:
 	
 	call PrintHorizRule
 	
-	; Say we are getting next image
+	; Say we are getting next bootloader image
 	mov si, mesg_status_2
 	call PrintString
 	call NextLine
@@ -65,17 +54,15 @@ start:
 check_LBP_extensions:
 	
 	; Check LBP extensions with BIOS disk services
-	; When interrupt is finished executing, it will set the CX register with features
-	; We are interested in seeing if Bit 0 is set to 1, which if it is, then it
-	; supports extensions
+	; When interrupt is finished executing, it will set the carry flag depending
+	; on whether there are extensions or not. If carry is cleared, then it does
+	; have them
 	mov ah, 0x41
 	mov bx, 0x55AA		; Magic number
-	mov dl, 0x80		; Drive number 1000 0000B is first one according to standards
+	mov dl, 0x80		; Drive number (first one according to standards)
 	int 0x13
 	
-	and cx, 0x0001		; Masks all except first bit
-	or cx, 0
-	jnz read_filesystem
+	jnc read_filesystem
 	
 	mov si, no_LBP_extensions		; If test failed, then say it has and halt
 	call PrintString
@@ -83,10 +70,59 @@ check_LBP_extensions:
 	hlt
 
 read_filesystem:
+
 	mov si, success
 	call PrintString
 	call NextLine
+	
+	; Create my address packet to read the first sector. I'm using the stack, so
+	; I have to push parameters in reverse order from usual
+	push word 0		; Starting sector to read from (8 bits)
+	push word 0
+	push word es	; Segment to save it in
+	push word 0		; Offset to store sectors in segment
+	push word 1		; Number of sectors to read
+	push byte 0		; Unused, left 0
+	push byte 16	; Number of bytes in packet	
+
+	; Perform read
+	mov ah, 0x42
+	mov si, sp		; Where our packet is. We use SP since it is in stack
+	mov dl, 0x80	; Drive number
+	int 0x13
+	
+	; If carry flag is cleared, then read performed successfully
+	jnc SectorContents
+	
+	; Say it failed to read if it did
+	mov si, error_message
+	call PrintString
+	
 	hlt
+	
+	; Print out contents of my one sector (or at least part of it)
+SectorContents:
+	mov cx, 4
+	mov bx, 0
+	
+	SectorContents_loop:
+		mov ax, [es:bx]		; di is connected to the es register
+		
+		push cx
+		push ax
+		call PrintRegister
+		pop cx
+		
+		dec cx
+		jz SectorContents_done
+		add bx, 2
+		jmp SectorContents_loop
+		
+	SectorContents_done:
+		mov si, success
+		call PrintString
+		hlt
+
 
 ; FUNCTIONS	
 	
@@ -165,8 +201,11 @@ PrintRegister:
 		
 		
 NextLine:
-	mov si, next_line
-	call PrintString
+	mov ah, 0x0E
+	mov al, CR
+	int 0x10
+	mov al, LF
+	int 0x10
 	ret
 
 
@@ -178,10 +217,10 @@ data:
 	
 	welcome_string db "Welcome to Dinosaur!",0
 	mesg_status_2 db "Reading 2nd Stage image...",0
-	next_line db CR,LF,0
 	
 	; Assorted error messages
 	no_LBP_extensions db "No LBP Ext!",0
+	error_message db "Error!",0
 	success db "Success",0
 	
 	
