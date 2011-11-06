@@ -13,18 +13,14 @@
 
 
 [BITS 16]		; In real mode, every instruction is 16 bits
-[ORG 0x7C00]	; This is where our code will be loaded, so we calculate
-				; addresses from here
+[ORG 0x7C00]	; My boot sector is loaded to this memory address, so my address
+				; calculations at assembly time must take that into account
+jmp start
 
 %define CR 13
 %define LF 10
 
 start:
-
-	cli
-	mov ax, 0x2000
-	mov es, ax
-	sti
 	
 	; Set video mode for BIOS so it always shows a large, colorful display for 
 	; drawing text
@@ -44,6 +40,7 @@ start:
 	call PrintString
 	call NextLine
 	
+	; Print a horizontal rule, or just a line separating things
 	call PrintHorizRule
 	
 	; Say we are getting next bootloader image
@@ -62,60 +59,71 @@ check_LBP_extensions:
 	mov dl, 0x80		; Drive number (first one according to standards)
 	int 0x13
 	
-	jnc read_filesystem
+	jnc read_disk
 	
 	mov si, no_LBP_extensions		; If test failed, then say it has and halt
 	call PrintString
 	call NextLine
 	hlt
 
-read_filesystem:
+read_disk:
 
 	mov si, success
 	call PrintString
 	call NextLine
 	
-	; Create my address packet to read the first sector. I'm using the stack, so
-	; I have to push parameters in reverse order from usual
-	push word 0		; Starting sector to read from (8 bits)
-	push word 0
-	push word es	; Segment to save it in
-	push word 0		; Offset to store sectors in segment
-	push word 1		; Number of sectors to read
-	push byte 0		; Unused, left 0
-	push byte 16	; Number of bytes in packet	
-
-	; Perform read
-	mov ah, 0x42
-	mov si, sp		; Where our packet is. We use SP since it is in stack
+	; Use the old fashioned CHS read style for better compatability
+	; MAJOR NOTE OF CONFUSION: Sectors are counted 1-based, track and head are
+	; 0-based
+	mov ah, 0x02
+	mov al, 3		; Num sectors to read
+	mov cx, 1		; Track and sector address (Upper 10 track, lower 6 sector)
+	mov dh, 0		; Head number
 	mov dl, 0x80	; Drive number
+	
+	; Set ES:BX to point to our buffer, which is at the end of this thing
+	mov bx, ds
+	mov es, bx
+	mov bx, buffer
+	
 	int 0x13
 	
 	; If carry flag is cleared, then read performed successfully
-	jnc SectorContents
+	jnc goto_secondstage
 	
 	; Say it failed to read if it did
 	mov si, error_message
 	call PrintString
+	call NextLine
+	
+	; Get the drive status to check error
+	mov ah, 0x01
+	mov dl, 0x80
+	int 0x13
+	
+	push ax
+	call PrintRegister
+	call NextLine
 	
 	hlt
 	
-	; Print out contents of my one sector (or at least part of it)
+	
 SectorContents:
-	mov cx, 4
-	mov bx, 0
+	mov cx, 20
+	mov di, bx
 	
 	SectorContents_loop:
-		mov ax, [es:bx]		; di is connected to the es register
+		mov ax, [di]
 		
 		push cx
 		push ax
 		call PrintRegister
+		call NextLine
 		pop cx
 		
 		dec cx
 		jz SectorContents_done
-		add bx, 2
+		add di, 2
 		jmp SectorContents_loop
 		
 	SectorContents_done:
@@ -229,3 +237,5 @@ data:
 end_filler:
     times 510 - ($ - $$) db 0		; Fills rest of sector with 0's
     dw 0xAA55						; Boot signature
+
+buffer:								; Location to put my buffer in
