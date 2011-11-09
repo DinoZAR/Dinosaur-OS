@@ -73,8 +73,6 @@ def new():
 	
 	outFile.close()
 	
-	# To be honest, this wasn't a whole lot. But, that's the magic of RAWR
-	
 def backup(outputFile):
 	pass
 
