@@ -12,9 +12,10 @@
 import sys
 import os
 import struct
+from rawr_utils import *
 
 # ------------------------------------------------------------------------------
-# Functions used
+# MAIN FUNCTIONS
 # ------------------------------------------------------------------------------
 
 def properUse():
@@ -49,7 +50,7 @@ def new():
 	
 	# Create a new RAWR entry defining the root entry
 	# A RAWR Entry looks like this:
-	# (Completed?) (Entry Type) (Name Length 32bit) (Name) (End LBA)
+	# (Entry Type) (Name Length 32bit) (Name) (End LBA)
 	#
 	# Entry types can be of the following (a byte long enumeration)
 	#
@@ -57,7 +58,6 @@ def new():
 	# 2: Directory
 	# 3: Thunder-ectory (directories gauranteed to be sequential, good for
 	#    streaming stuff)
-	# 4: Link (used in directories to find files)
 	#
 	# RAWR is simple in that it only possesses Entries. The combination of those
 	# entries and the algorithms used is what makes the RAWR file system. Making
@@ -67,7 +67,7 @@ def new():
 	
 	entry = struct.pack('BI', 2, 1)
 	entry += struct.pack('s', '/')
-	entry += struct.pack('II', 3)		# Root can have links to entries
+	entry += struct.pack('I', 3)		# Root can have links to entries
 										# from LBA 2 to 3
 	outFile.write(entry)
 	
@@ -78,8 +78,36 @@ def new():
 def backup(outputFile):
 	pass
 
-def write(file, warning, append):
-	pass
+def write(filePath, warning, append):
+	
+	# Check to see if there is a forward slash first. If there isn't one, then
+	# the file path isn't absolute, which is crap. Tell the user that and exit
+	# with a proper use string.
+	if filePath[0] != '/':
+		print "You fool! Use absolute paths! Read it!"
+		print
+		print properUse()
+		sys.exit()
+		
+	# Parse the filePath into a series of directories and files
+	fileDirList = filePath.split('/')
+	
+	# Remove first occurrance of a blank, if one is present
+	fileDirList.remove("")
+	print fileDirList
+		
+	# Open up my filesystem image
+	imagePath = os.path.abspath('../../../Dinosaur_RAWR.img')
+	fs = open(imagePath, 'rb')
+	
+	# Follow the directories to the file specified. For each one that doesn't
+	# exist, create it and move on.
+	rootEntry = fs.read(13)
+	rootEntry = struct.unpack('BIsI', rootEntry)
+	print rootEntry
+	for d in fileDirList:
+		pass
+	fs.close()
 
 	
 # ------------------------------------------------------------------------------
