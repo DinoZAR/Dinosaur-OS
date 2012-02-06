@@ -1,0 +1,32 @@
+0: Divide by Zero
+1: Debug
+2: Non Maskable Interrupt
+3: Breakpoint
+4: Overflow
+5: Bound-Range
+6: Invalid-Opcode
+7: Device-Not-Available
+8: Double-Fault
+9: Coprocessor Segement (Do not use!)
+10: Invalid TSS
+11: Segment Not Present
+12: Stack
+13: General Protection
+14: Page-Fault
+15: (Do not use!)
+16: x87 Floating-Point Exception Pending
+17: Alignment Check
+18: Machine Check
+19: SIMD Floating-Point
+20: (Do not use!)
+21: (Do not use!)
+22: (Do not use!)
+23: (Do not use!)
+24: (Do not use!)
+25: (Do not use!)
+26: (Do not use!)
+27: (Do not use!)
+28: (Do not use!)
+29: (Do not use!)
+30: Security Exception
+31: (Do not use!)
