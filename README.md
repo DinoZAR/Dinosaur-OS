@@ -1,6 +1,6 @@
 # Welcome to Dinosaur!
 
-Dinosaur is a new operating system designed for multimedia production using the AMD64 architecture. It uses Assembly for the majority of the kernel, which should make for a fast and pleasent operating system.
+Dinosaur is a new operating system designed for multimedia production using the AMD64 architecture. It uses Assembly for the majority of the kernel, which should make for a fast and pleasant operating system.
 
 ## How do I get started?
 
@@ -16,7 +16,7 @@ Not too bad, I would say.
 
 However, in Windows, you have to set up your **Path** environment variable to point to yasm.exe and VirtualBox's VBoxManage.exe in order for the build scripts to work. Here's how to find both:
 
- * yasm.exe: Where ever you extracted yasm, that is where yasm.exe would be.
+ * yasm.exe: Wherever you extracted yasm, that is where yasm.exe would be.
  * VBoxManage.exe: If you installed it like normal people, VBoxManage.exe would be under **C:\Program Files\Oracle\VirtualBox**.
  
 After this is all set up, follow the build instructions below.
@@ -42,3 +42,9 @@ After this is all set up, follow the build instructions below.
 ### Linux
 
 1. Follow Window's instructions to the letter, except build scripts are in **build_linux**, and you would run **run-all**. Everything's named the same, which makes everything consistent and maintenance a breeze.
+
+## Current State of Project
+
+So far, the bootloader is still being developed. I'm currently writing documentation about it as well so that I don't forget what I am doing. Some code may potentially be borrowed from Pure64, which is a bootloader for BareMetalOS that sets up the CPU in pure 64-bit mode.
+
+Also, since I will also be designing my own filesystem called RAWR (Ridiculously Awesome Reader/Writer), that has to be developed before I can move on to installing the second-stage bootloader and kernel.
