@@ -36,79 +36,75 @@ def properUse():
 	pString += 'write - Writes a file to the filesystem\n'
 	pString += '-w: Warn if this file already exists\n'
 	pString += '-a: Append rather than overwrite an existing file\n'
-	pString += '[Note: Files to be written must use Unix absolute paths]'
+	pString += '[Note: Files to be written must use Unix absolute paths]\n\n'
+	
+	# Delete command
+	pString += 'delete - Deletes the file from the file system\n'
+	pString += '[no options]\n\n'
 	
 	return pString
 	
 
 def new():
 	
-	# Make a brand-new RAWR file system
-	outFileName = os.path.abspath('../../../Dinosaur_RAWR.img')
+	# Create a new RAWR file system disc image
+	newRAWRPath = os.path.abspath('../../../RAWR.img')
+	newRAWR = open(newRAWRPath, 'wb')
 	
-	outFile = open(outFileName, 'wb')
+	# Say what I am doing
+	print 'Creating file system in RAWR.img outside working directory...'
 	
-	# Create a new RAWR entry defining the root entry
-	# A RAWR Entry looks like this:
-	# (Entry Type) (Name Length 32bit) (Name) (End LBA)
-	#
-	# Entry types can be of the following (a byte long enumeration)
-	#
-	# 1: File
-	# 2: Directory
-	# 3: Thunder-ectory (directories gauranteed to be sequential, good for
-	#    streaming stuff)
-	#
-	# RAWR is simple in that it only possesses Entries. The combination of those
-	# entries and the algorithms used is what makes the RAWR file system. Making
-	# everything as entries improves maintenance because not only can one add
-	# more data to each entry when the filesystem becomes more advanced, they
-	# can also add new kinds of entries without breaking what was there before.
+	# Create my RAWR header using default options below
+	asciiLabel = 'RAWR File System'
+	versionMajor = '0'
+	versionMinor = '5'
+	lastAccessTime = 0 # will change in future
+	sectorSize = 512
+	sizeOfFileSystem = 20971520 # in sectors, meaning size will be 10 GB.
+	blockSize = 81920 # In sectors. This should make 256 blocks
+	memoryUnitSize = 8192 # This will allow around 1,000 memory units in each
+						  # block, creating up to 256,000 files total
 	
-	entry = struct.pack('BI', 2, 1)
-	entry += struct.pack('s', '/')
-	entry += struct.pack('I', 3)		# Root can have links to entries
-										# from LBA 2 to 3
-	outFile.write(entry)
+	# Pack it all into a binary string to write to file
+	rawrHeader = struct.pack('<16sccIIIII', asciiLabel, versionMajor, versionMinor, 
+					lastAccessTime, sectorSize, sizeOfFileSystem, blockSize, 
+					memoryUnitSize)
 	
-	outFile.close()
+	newRAWR.write(rawrHeader)
 	
-	# To be honest, this wasn't a whole lot. But, that's the magic of RAWR
+	# Calculate the number of memory units possible in a single block.
+	# Do this by finding a quotient and remainder. If the remainder is smaller
+	# than the space required to store the memory allocation bitmap, then the
+	# maximum possible memory units is the quotient - 1.
+	quotient = (blockSize * sectorSize) / memoryUnitSize
+	remainder = (blockSize * sectorSize) % memoryUnitSize
+	
+	numMemoryUnits = 0
+	
+	if (4 + quotient) > remainder:
+		numMemoryUnits = quotient - 1
+	else:
+		numMemoryUnits = quotient
+	
+	# Now, I must begin formatting file system by writing blocks in correct
+	# locations across the partition space.
+	x = 0
+	
+	# Skip ahead of RAWR header
+	x += len(rawrHeader)
+	
+	# Begin the writing of block headers
+	while x < (sizeOfFileSystem * 512):
+		pass
 	
 def backup(outputFile):
 	pass
 
 def write(filePath, warning, append):
-	
-	# Check to see if there is a forward slash first. If there isn't one, then
-	# the file path isn't absolute, which is crap. Tell the user that and exit
-	# with a proper use string.
-	if filePath[0] != '/':
-		print "You fool! Use absolute paths! Read it!"
-		print
-		print properUse()
-		sys.exit()
-		
-	# Parse the filePath into a series of directories and files
-	fileDirList = filePath.split('/')
-	
-	# Remove first occurrance of a blank, if one is present
-	fileDirList.remove("")
-	print fileDirList
-		
-	# Open up my filesystem image
-	imagePath = os.path.abspath('../../../Dinosaur_RAWR.img')
-	fs = open(imagePath, 'rb')
-	
-	# Follow the directories to the file specified. For each one that doesn't
-	# exist, create it and move on.
-	rootEntry = fs.read(13)
-	rootEntry = struct.unpack('BIsI', rootEntry)
-	print rootEntry
-	for d in fileDirList:
-		pass
-	fs.close()
+	pass
 
+def delete(filePath):
+	pass
 	
 # ------------------------------------------------------------------------------
 # PROGRAM EXECUTION STARTS HERE: Process my arguments
@@ -159,4 +155,13 @@ if command == 'write':
 		
 	# Issue the command and exit
 	write(outputFile, warning, append)
+	sys.exit()
+
+if command == 'delete':
+
+	# Get my path argument
+	filePath = sys.argv[2]
+	
+	# Issue the command and exit
+	delete(filePath)
 	sys.exit()
