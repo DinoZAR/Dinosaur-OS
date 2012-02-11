@@ -62,8 +62,8 @@ def new():
 	sectorSize = 512
 	sizeOfFileSystem = 20971520 # in sectors, meaning size will be 10 GB.
 	blockSize = 81920 # In sectors. This should make 256 blocks
-	memoryUnitSize = 8192 # This will allow around 1,000 memory units in each
-						  # block, creating up to 256,000 files total
+	memoryUnitSize = 8192 # This will allow around 1,000 memory units in
+			      		  # each block, creating up to 256,000 files total
 	
 	# Pack it all into a binary string to write to file
 	rawrHeader = struct.pack('<16sccIIIII', asciiLabel, versionMajor, versionMinor, 
@@ -93,9 +93,15 @@ def new():
 	# Skip ahead of RAWR header
 	x += len(rawrHeader)
 	
-	# Begin the writing of block headers
-	while x < (sizeOfFileSystem * 512):
-		pass
+	# Create a block header that will be the same in each block
+	
+	# Make a memory allocation bitmap
+	
+	
+	blockHeader = struct.pack('<4s')
+	
+	while x < (sizeOfFileSystem * sectorSize):
+		
 	
 def backup(outputFile):
 	pass
