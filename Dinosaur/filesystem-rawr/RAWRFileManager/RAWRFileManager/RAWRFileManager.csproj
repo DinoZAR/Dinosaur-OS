@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RAWRManager.cs" />
     <Compile Include="FormatRAWRProgress.xaml.cs">
       <DependentUpon>FormatRAWRProgress.xaml</DependentUpon>
     </Compile>

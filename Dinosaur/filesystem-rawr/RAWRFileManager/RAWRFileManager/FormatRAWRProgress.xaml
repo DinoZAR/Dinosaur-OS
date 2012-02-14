@@ -4,7 +4,7 @@
         Title="Formatting RAWR..." Height="114" Width="423" Name="win_FormatRAWR">
     <Grid>
 		<StackPanel>
-			<Label Content="Writing RAWR Header..." FontStyle="Italic" FontStretch="Normal" Name="FormatLabel" />
+			<Label Content="Formatting RAWR file system..." FontStyle="Italic" FontStretch="Normal" Name="FormatLabel" />
 			<ProgressBar Height="40" Name="FormatProgressBar" />
 		</StackPanel>
 	</Grid>
