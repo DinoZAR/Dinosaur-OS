@@ -1,0 +1,29 @@
+﻿<Window x:Class="RAWRFileManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RAWR File Manager" Height="454" Width="639" Loaded="Window_Loaded"
+		xmlns:src="clr-namespace:RAWRFileManager" Closed="Window_Closed">
+	
+    <Grid>
+		<Menu Height="23" HorizontalAlignment="Left" Name="menu1" VerticalAlignment="Top">
+			<MenuItem Name="FileMenu" Header="File">
+				<MenuItem Name="NewRAWRItem" Header="New RAWR" Click="NewRAWRItem_Click" />
+				<MenuItem Name="OpenRAWRItem" Header="Open RAWR" />
+				<MenuItem Name="SaveRAWRItem" Header="Save to RAWR" />
+				<Separator />
+				<MenuItem Name="QuitItem" Header="Quit" />
+			</MenuItem>
+			<MenuItem Name="EditMenu" Header="Edit" />
+			<MenuItem Name="HelpMenu" Header="Help"/>
+		</Menu>
+		<TreeView Height="376" HorizontalAlignment="Left" Margin="12,28,0,0" Name="RAWRTree" VerticalAlignment="Top" Width="592">
+			<TreeViewItem Header="General RAWR Information">
+				<TreeViewItem Name="StatusTreeItem" Header="No RAWR Loaded" TextBlock.FontStyle="Italic" />
+			</TreeViewItem>
+			<TreeViewItem Header="File System" />
+		</TreeView>
+		<Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="114,-2,0,0" Name="btn_addFile" VerticalAlignment="Top" Width="75" />
+		<Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="195,-2,0,0" Name="btn_delete" VerticalAlignment="Top" Width="75" />
+		<Button Content="Rename" Height="23" HorizontalAlignment="Left" Margin="276,-2,0,0" Name="btn_rename" VerticalAlignment="Top" Width="75" />
+	</Grid>
+</Window>

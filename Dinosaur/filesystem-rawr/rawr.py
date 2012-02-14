@@ -94,13 +94,23 @@ def new():
 	x += len(rawrHeader)
 	
 	# Create a block header that will be the same in each block
+	blockHeader = struct.pack('<4s', 'BLCK')
 	
-	# Make a memory allocation bitmap
+	numBytesNeeded = numMemoryUnits // 4
+	if (numMemoryUnits % 4) > 0:
+		numBytesNeeded += 1
 	
+	# Add bytes to end of block header that are all 0xFF, or 1111 in bytecode
+	# This signifies that all memory unit slots are free.
+	for i in range(numBytesNeeded):
+		blockHeader += struct.pack('<B', 0xFF)
 	
-	blockHeader = struct.pack('<4s')
-	
+	# Paste that block header across the entire file system
 	while x < (sizeOfFileSystem * sectorSize):
+	
+	
+	# After we are done with everything, close the new RAWR file
+	newRAWR.close()
 		
 	
 def backup(outputFile):
@@ -117,7 +127,7 @@ def delete(filePath):
 # ------------------------------------------------------------------------------
 
 # Second argument should be my command
-command_list = ["new", "backup", "write"]
+command_list = ["new", "backup", "write", "delete"]
 command = sys.argv[1]
 
 # Check to see if command is a subset of my commands available

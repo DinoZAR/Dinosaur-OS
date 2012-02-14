@@ -1,0 +1,16 @@
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\bin\Debug\RAWRFileManager.exe
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\bin\Debug\RAWRFileManager.pdb
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\MainWindow.baml
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\App.g.cs
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\RAWRFileManager_MarkupCompile.cache
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\RAWRFileManager.g.resources
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\RAWRFileManager.Properties.Resources.resources
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\RAWRFileManager.exe
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\RAWRFileManager.pdb
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\RAWRFileManager_MarkupCompile.lref
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\FormatRAWRProgress.baml
+C:\Users\Spen-ZAR\Dinosaur-OS\Dinosaur\filesystem-rawr\RAWRFileManager\RAWRFileManager\obj\x86\Debug\FormatRAWRProgress.g.cs

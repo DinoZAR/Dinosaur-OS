@@ -1,0 +1,11 @@
+﻿<Window x:Class="RAWRFileManager.FormatRAWRProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Formatting RAWR..." Height="114" Width="423" Name="win_FormatRAWR">
+    <Grid>
+		<StackPanel>
+			<Label Content="Writing RAWR Header..." FontStyle="Italic" FontStretch="Normal" Name="FormatLabel" />
+			<ProgressBar Height="40" Name="FormatProgressBar" />
+		</StackPanel>
+	</Grid>
+</Window>
