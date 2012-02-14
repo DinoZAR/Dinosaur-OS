@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
+using System.IO;
 
 namespace RAWRFileManager
 {
@@ -18,7 +19,9 @@ namespace RAWRFileManager
 			RAWRFile = rawrFile;
 		}
 
-
+		/*
+		 * Data accessors
+		 */
 		public MemoryUnit Get(string absPath)
 		{
 			return null;
@@ -27,6 +30,40 @@ namespace RAWRFileManager
 		public MemoryUnit[] ReadDirectory(DirectoryUnit directory)
 		{
 			return null;
+		}
+
+
+		/*
+		 * Adders, deleters, and changers
+		 */
+		/// <summary>
+		/// Adds the file given in absPath to the RAWR filesystem using the data in "f".
+		/// 
+		/// Example:
+		/// To add a text file called YourMom.txt to /home/your/mom/, you would issue the following:
+		/// .Add({your file from your file system called YourMom.txt}, "/home/your/mom/YourMom.txt");
+		/// </summary>
+		/// <param name="f">File containing the data to write into the file system.</param>
+		/// <param name="absPath">The complete path, including the file name and extension, into the file system to save the file.</param>
+		/// <returns></returns>
+		public bool Add(File f, string absPath)
+		{
+			return false;
+		}
+
+		public bool Delete(string absPath)
+		{
+			return false;
+		}
+
+		public bool Rename(string absPath, string newName)
+		{
+			return false;
+		}
+
+		public bool Move(string absPath, string absPathNewRoot)
+		{
+			return false;
 		}
 	}
 

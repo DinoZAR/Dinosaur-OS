@@ -26,6 +26,9 @@ namespace RAWRFileManager
 		// Progress Windows
 		FormatRAWRProgress pgFormatRAWR;
 
+		// File system data and manager
+		RAWRManager manager;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -34,6 +37,7 @@ namespace RAWRFileManager
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			pgFormatRAWR = new FormatRAWRProgress();
+			manager = new RAWRManager("");
 		}
 
 		private void NewRAWRItem_Click(object sender, RoutedEventArgs e)
